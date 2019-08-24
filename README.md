@@ -5,8 +5,8 @@
 <br><br>
 <h3>Installing</h3><br>
 $ pkg install git<br>
-$ git clone https://github.com/LOoLzeC/ASU<br>
-$ cd ASU<br>
+$ git clone https://github.com/ASU-LAB/asu-v5<br>
+$ cd asu-v5<br>
 $ bash install.sh<br><br>
 <h1>App Check</h1><br>
 <img src="https://raw.githubusercontent.com/LOoLzeC/ASU/master/raw/_20190531_050033.JPG"/>
