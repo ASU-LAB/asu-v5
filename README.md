@@ -14,6 +14,8 @@ $ bash install.sh<br><br>
 <img src="https://raw.githubusercontent.com/LOoLzeC/ASU/master/raw/2019_05_18_17_27_51.png"/>
 <br><h1>Spammers</h1><br>
 <img src="https://raw.githubusercontent.com/ASU-LAB/asu-v5/master/raw/Screenshot_2019-09-12-05-44-06-687_com.termux.png"/>
+<br><h1>Bot Collections</h1><br>
+<img src="https://raw.githubusercontent.com/ASU-LAB/asu-v5/master/raw/Screenshot_2019-09-12-05-48-39-318_com.termux.png"/>
 <br>
 <h1><a href ="https://youtu.be/G6U2P3T746A">YouTube Tutorial</a></h1>
 <a href ="https://mbasic.facebook.com/achmad.luthfi.hadi.3">ask me on facebook</a>
