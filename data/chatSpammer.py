@@ -90,7 +90,8 @@ class spamChatlist:
                                 if "Lihat Pesan Sebelumnya" in i.text:
                                         self.dumps(self.url.format(i["href"]))
                         except:pass
-                print "\n[!] <n> for other msg ex: hei<n>who r u"                self.message=raw_input("[?] Message: ").split("<n>")
+                print "\n[!] <n> for other msg ex: hei<n>who r u"
+                self.message=raw_input("[?] Message: ").split("<n>")
                 for i in self.d:
                         self.send(i)
 
