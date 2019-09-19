@@ -129,7 +129,8 @@ class SPAMMER(object):
                         print("%s[*]%s Target: %s"%(G,N,bs.find("title").text))
                         self.lup()
                 else:
-                        print("%s[!]%s Unknown target id!"%(R,N))                        self.target()
+                        print("%s[!]%s Unknown target id!"%(R,N))
+                        self.target()
 
         def lup(self):
                 data=""
