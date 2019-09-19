@@ -1,3 +1,291 @@
+import os,json
+import requests
+import threading
+import mechanize
+from data import cache
+from data.color import *
+from data import language
+import bs4,re,sys,time,random
+from data import multiBruteforce
+import subprocess as kontolatos
+from multiprocessing.pool import ThreadPool
+cache.cleanCache()
 
-d=[35, 45, 42, 45, 99, 111, 100, 105, 110, 103, 58, 117, 116, 102, 45, 56, 45, 42, 45, 10, 35, 32, 67, 111, 100, 101, 100, 32, 66, 121, 32, 68, 101, 114, 97, 121, 10, 39, 39, 39, 10, 9, 32, 82, 101, 98, 117, 105, 108, 100, 32, 67, 111, 112, 121, 114, 105, 103, 104, 116, 32, 67, 97, 110, 39, 116, 32, 109, 97, 107, 101, 32, 117, 32, 114, 101, 97, 108, 32, 112, 114, 111, 103, 114, 97, 109, 109, 101, 114, 10, 39, 39, 39, 10, 35, 32, 82, 101, 112, 111, 114, 116, 32, 66, 117, 103, 32, 79, 110, 32, 77, 121, 32, 79, 116, 104, 101, 114, 32, 83, 111, 115, 109, 101, 100, 10, 35, 32, 105, 110, 115, 116, 97, 103, 114, 97, 109, 58, 32, 64, 114, 101, 121, 121, 48, 53, 95, 10, 35, 32, 102, 97, 99, 101, 98, 111, 111, 107, 58, 32, 104, 116, 116, 112, 115, 58, 47, 47, 102, 97, 99, 101, 98, 111, 111, 107, 46, 99, 111, 109, 47, 97, 99, 104, 109, 97, 100, 46, 108, 117, 116, 104, 102, 105, 46, 104, 97, 100, 105, 46, 51, 10, 10, 35, 32, 77, 97, 110, 117, 97, 108, 32, 67, 111, 108, 111, 114, 10, 10, 105, 109, 112, 111, 114, 116, 32, 115, 121, 115, 10, 10, 105, 102, 32, 40, 34, 108, 105, 110, 117, 120, 34, 32, 105, 110, 32, 115, 121, 115, 46, 112, 108, 97, 116, 102, 111, 114, 109, 46, 108, 111, 119, 101, 114, 40, 41, 41, 58, 10, 9, 10, 9, 87, 32, 61, 32, 39, 92, 48, 51, 51, 91, 49, 59, 51, 55, 109, 39, 32, 10, 9, 78, 32, 61, 32, 39, 92, 48, 51, 51, 91, 48, 109, 39, 10, 9, 82, 32, 61, 32, 39, 92, 48, 51, 51, 91, 49, 59, 51, 55, 109, 92, 48, 51, 51, 91, 51, 49, 109, 39, 10, 9, 66, 32, 61, 32, 39, 92, 48, 51, 51, 91, 49, 59, 51, 55, 109, 92, 48, 51, 51, 91, 51, 52, 109, 39, 32, 10, 9, 71, 32, 61, 32, 39, 92, 48, 51, 51, 91, 49, 59, 51, 50, 109, 39, 10, 9, 79, 32, 61, 32, 39, 92, 48, 51, 51, 91, 51, 51, 109, 39, 10, 9, 67, 32, 61, 32, 39, 92, 48, 51, 51, 91, 51, 54, 109, 39, 10, 9, 110, 111, 116, 105, 99, 101, 32, 32, 61, 32, 34, 123, 125, 123, 125, 91, 42, 93, 123, 125, 32, 34, 46, 102, 111, 114, 109, 97, 116, 40, 78, 44, 66, 44, 78, 41, 10, 9, 119, 97, 114, 110, 105, 110, 103, 32, 61, 32, 34, 123, 125, 91, 45, 93, 123, 125, 32, 34, 46, 102, 111, 114, 109, 97, 116, 40, 82, 44, 78, 41, 10, 9, 103, 111, 111, 100, 32, 32, 32, 32, 61, 32, 34, 123, 125, 91, 33, 93, 123, 125, 32, 34, 46, 102, 111, 114, 109, 97, 116, 40, 71, 44, 78, 41, 10, 9, 119, 97, 114, 110, 32, 32, 32, 32, 61, 32, 34, 123, 125, 91, 33, 93, 123, 125, 32, 34, 46, 102, 111, 114, 109, 97, 116, 40, 79, 44, 78, 41, 10, 9, 10, 101, 108, 115, 101, 58, 10, 9, 10, 9, 87, 32, 61, 32, 39, 39, 10, 9, 78, 32, 61, 32, 39, 39, 10, 9, 82, 32, 61, 32, 39, 39, 10, 9, 66, 32, 61, 32, 39, 39, 10, 9, 71, 32, 61, 32, 39, 39, 10, 9, 79, 32, 61, 32, 39, 39, 10, 9, 67, 32, 61, 32, 39, 39, 10, 9, 110, 111, 116, 105, 99, 101, 32, 32, 61, 32, 39, 39, 10, 9, 119, 97, 114, 110, 105, 110, 103, 32, 61, 32, 39, 39, 10, 9, 103, 111, 111, 100, 32, 32, 32, 32, 61, 32, 39, 39, 10, 9, 119, 97, 114, 110, 32, 32, 32, 32, 61, 32, 39, 39, 10];exec "".join([chr(i) for i in d])
-			
+class kirim(object):
+        def __init__(self):
+                pass
+
+        def send(self,req,k,text):
+                i="https://mbasic.facebook.com/{}"
+                data=[]
+                url=bs4.BeautifulSoup(req.get(k).text,
+                        features="html.parser")
+                for x in url("form"):
+                        if "/messages/send/" in x["action"]:
+                                data.append(i.format(x["action"]))
+                                break
+
+                for x in url("input"):
+                        try:
+                                if "fb_dtsg" in x["name"]:
+                                        data.append(x["value"])
+                                if "jazoest" in x["name"]:
+                                        data.append(x["value"])
+                                if "ids" in x["name"]:
+                                        data.append(x["name"])
+                                        data.append(x["value"])
+                                        if len(data) ==7:
+                                                break
+                        except:pass
+
+                if len(data) ==7:
+                        f=req.post(
+                        data[0],
+                                data={
+                                        "fb_dtsg":data[1],
+                                        "jazoest":data[2],
+                                        data[3]:data[4],
+                                        data[5]:data[6],
+                                        "body":text,
+                                        "Send":"Kirim"}
+                        ).url
+                        if "send_success" in f:
+                                print("[+] %s -> SENT!"%(url.find("title").text))
+                        else:
+                                print("[+] %s -> NOT SENT!"%(url.find("title").text))
+
+# spam chat list
+
+class spamChatlist:
+        def __init__(self):
+                self.s=requests.Session()
+                self.d=[]
+                self.url="https://mbasic.facebook.com/{}"
+                config=json.loads(open("config/config.json").read())
+                s=self.s.post(
+                        self.url.format("login"),data={"email":config["email"],
+                                "pass":config["pass"]}).url
+                if "save-device" in s or "m_sess" in s:
+                        self.rep()
+
+                else:exit(R+" login failed.")
+
+        def rep(self):
+                try:
+                        self.replycount=input("[?] how many message you want to reply? ")
+                except Exception as e:
+                        print("%s[!]%s %s"%(R,N,e))
+                        self.rep()
+                self.dumps(self.url.format("messages"))
+
+        def dumps(self,url):
+                s=bs4.BeautifulSoup(self.s.get(url).text,"html.parser")
+                for i in s.find_all("a",href=True):
+                        try:
+                                if "messages/read" in i["href"]:
+                                        if len(self.d) ==self.replycount:
+                                                break
+                                        self.d.append(self.url.format(i["href"]))
+                                        print "\r[GET]: %s msg"%(len(self.d)),;sys.stdout.flush()
+                                if "Lihat Pesan Sebelumnya" in i.text:
+                                        self.dumps(self.url.format(i["href"]))
+                        except:pass
+                print "\n[!] <n> for other msg ex: hei<n>who r u"                self.message=raw_input("[?] Message: ").split("<n>")
+                for i in self.d:
+                        self.send(i)
+
+        def send(self,url):
+                kirim().send(self.s,url,random.choice(self.message))
+
+class SPAMMER(object):
+        def __init__(self):
+                config=open("config/config.json").read()
+                self.config=json.loads(config)
+                self.req = requests.Session()
+                self.i="https://mbasic.facebook.com/{}"
+                self.suck=0
+                self.login()
+
+        def login(self):
+                s=self.req.post(self.i.format("login"),
+                        data={
+                                "email":self.config["email"],
+                                "pass":self.config["pass"]
+                        }
+                ).url
+                if "save-device" in s or "m_sess" in s:
+                        self.target()
+                else:
+                        exit("%s[!]%s Login Failed/checkpoint"%(R,N))
+
+        def target(self):
+                self.id=raw_input("%s[?]%s Target ID: "%(G,N))
+                if self.id =="":
+                        self.target()
+                k=self.req.get(self.i.format(self.id))
+                if k.status_code ==200:
+                        bs=bs4.BeautifulSoup(k.text,features="html.parser")
+                        print("%s[*]%s Target: %s"%(G,N,bs.find("title").text))
+                        self.lup()
+                else:
+                        print("%s[!]%s Unknown target id!"%(R,N))                        self.target()
+
+        def lup(self):
+                data=""
+                self.datas=[]
+                try:
+                        self.lop=input("%s[?]%s Loop: "%(G,N))
+                except Exception as f:
+                        print("%s[!]%s %s"%(R,N,f))
+                        self.lup()
+                a=bs4.BeautifulSoup(self.req.get(self.i.format(self.id)).text,
+                        features="html.parser")
+                for x in a.find_all("a",href=True):
+                        if "messages/thread" in x["href"]:
+                                data=self.i.format(x["href"])
+                if data !="":
+                        for x in range(self.lop):
+                                self.datas.append(data)
+                        self.msg()
+                else:
+                        print("%s[!]%s cant send message."%(R,N))
+
+        def msg(self):
+                self.mes=raw_input(
+                        "%s[?]%s Message: "%(G,N)).split(",")
+                p=ThreadPool(5)
+                p.map(self.send,self.datas)
+                exit("\n[*] finished.")
+
+        def send(self,k):
+                data=[]
+                url=bs4.BeautifulSoup(self.req.get(k).text,
+                        features="html.parser")
+                for x in url("form"):
+                        if "/messages/send/" in x["action"]:
+                                data.append(self.i.format(x["action"]))
+                                break
+
+                for x in url("input"):
+                        try:
+                                if "fb_dtsg" in x["name"]:
+                                        data.append(x["value"])
+                                if "jazoest" in x["name"]:
+                                        data.append(x["value"])
+                                if "ids" in x["name"]:
+                                        data.append(x["name"])
+                                        data.append(x["value"])
+                                        if len(data) ==7:
+                                                break
+                        except:pass
+
+                if len(data) ==7:
+                        f=self.req.post(
+                        data[0],
+                                data={
+                                        "fb_dtsg":data[1],
+                                        "jazoest":data[2],
+                                        data[3]:data[4],
+                                        data[5]:data[6],
+                                        "body":random.choice(self.mes),
+                                        "Send":"Kirim"}
+                        ).url
+                        if "send_success" in f:
+                                self.suck+=1
+                                print("%s[%s]%s %s -> SENT!"%(
+                                        G,self.suck,N,url.find("title").text))
+                        else:
+                                print("%s[!]%s %s -> NOT SENT."%(                                        R,N,url.find("title").text))
+
+
+
+# SEND Mass
+class massal(object):
+        def __init__(self):
+                config=open("config/config.json").read()
+                self.config=json.loads(config)
+                self.req = requests.Session()
+                self.i="https://mbasic.facebook.com/{}"
+                self.suck=0
+                self.login()
+
+        def login(self):
+                s=self.req.post(self.i.format("login"),
+                        data={
+                                "email":self.config["email"],
+                                "pass":self.config["pass"]}
+                ).url
+                if "save-device" in s or "m_sess" in s:
+                        language.lang(self.req,self.i.format("language.php"))
+                        self.list()
+                else:
+                        exit("%s[!]%s login failed/checkpoint."%(R,N))
+
+        def list(self):
+                try:
+                        self.lis=open(
+                                raw_input("%s[?]%s List ID: "%(
+                        G,N))).read().splitlines()
+                except Exception as __errors__:
+                        print("%s[!]%s %s"%(R,N,__errors__))
+                        self.list()
+                print("%s[!]%s Total ID: %s"%(R,N,len(self.lis)))
+                print("%s[*]%s use coma <n> for new line"%(R,N))
+                self.msg()
+
+        def msg(self):
+                self.ms=raw_input("%s[?]%s Message: "%(
+                        G,N)).replace("<n>","\n")
+                map(self.cek,self.lis)
+
+        def cek(self,list):
+                s=self.req.get(self.i.format(list))
+                if s.status_code ==200:
+                        self.check(bs4.BeautifulSoup(s.text,
+                                features="html.parser"))
+
+        def check(self,bs):
+                for x in bs.find_all("a",href=True):
+                        if "messages/thread/" in x["href"]:
+                                self.open(bs4.BeautifulSoup(
+                                        self.req.get(self.i.format(x["href"])).text,
+                                features="html.parser"))
+                                break
+
+        def open(self,url):
+                data=[]
+                for x in url("form"):
+                        if "/messages/send/" in x["action"]:
+                                data.append(self.i.format(x["action"]))
+                                break
+
+                for x in url("input"):
+                        try:
+                                if "fb_dtsg" in x["name"]:
+                                        data.append(x["value"])
+                                if "jazoest" in x["name"]:
+                                        data.append(x["value"])
+                                if "ids" in x["name"]:
+                                        data.append(x["name"])
+                                        data.append(x["value"])
+                                        if len(data) ==7:
+                                                break
+                        except:pass
+                if len(data) ==7:
+                        f=self.req.post(
+                        data[0],
+                                data={
+                                        "fb_dtsg":data[1],
+                                        "jazoest":data[2],
+                                        data[3]:data[4],
+                                        data[5]:data[6],
+                                        "body":self.ms,
+                                        "Send":"Kirim"}
+                        ).url
+                        if "send_success" in f:
+                                self.suck+=1
+                                print("%s[%s]%s %s -> SENT!"%(
+                                        G,self.suck,N,url.find("title").text))
+                        else:
+                                print("%s[!]%s %s -> NOT SENT."%(                                        R,N,url.find("title").text))
+
